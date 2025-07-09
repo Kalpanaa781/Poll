@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Polls</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #ffecd2, #fcb69f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            width: 500px;
+        }
+        h2 { text-align: center; }
+        ul { list-style: none; padding: 0; }
+        li {
+            background: #f2f2f2;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        a { text-decoration: none; color: #333; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Available Polls</h2>
+        <ul>
+            {% for poll in polls %}
+                <li><a href="{% url 'poll_detail' poll.id %}">{{ poll.question }}</a></li>
+            {% empty %}
+                <li>No polls available</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

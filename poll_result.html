@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+    <style>
+        body { font-family: 'Segoe UI'; background: #e6ffe6; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .container { background: white; padding: 30px; border-radius: 15px; width: 500px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>{{ poll.question }}</h2>
+        <ul>
+            {% for choice in poll.choice_set.all %}
+                <li>{{ choice.option_text }} — {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+            {% endfor %}
+        </ul>
+        <p><strong>Total Votes:</strong> {{ poll.total_votes }}</p>
+        <a href="{% url 'poll_list' %}">← Back to Polls</a>
+    </div>
+</body>
+</html>

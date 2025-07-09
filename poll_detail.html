@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ poll.question }}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI';
+            background: #ffe6e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 500px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #ff4d4d;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>{{ poll.question }}</h2>
+        <form method="POST" action="{% url 'vote' poll.id %}">
+            {% csrf_token %}
+            {% for choice in poll.choices.all %}
+                <label>
+                    <input type="radio" name="choice" value="{{ choice.id }}" required>
+                    {{ choice.option_text }}
+                </label>
+            {% empty %}
+                <p>No options available for this poll.</p>
+            {% endfor %}
+            <button type="submit">Vote</button>
+        </form>
+    </div>
+</body>
+</html>
